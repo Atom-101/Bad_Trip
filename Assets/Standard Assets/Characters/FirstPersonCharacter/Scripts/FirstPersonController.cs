@@ -47,6 +47,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+		
+		//////////////////////////////////
+		
+		/////////////////////////////////
 
         // Use this for initialization
         private void Start()
@@ -61,9 +65,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-			//
+			
+			///////////////////////////
 			move_hash = Animator.StringToHash("moving");
-			//
+			//////////////////////////
 
         }
 
@@ -112,6 +117,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			///////////////////////////////////
 			/// //////////////////////////////
+			
+			//Animations
 			if (m_Input.magnitude != 0) {
 				anim_hud.SetBool (move_hash, true);
 				anim_left.SetBool (move_hash, true);
@@ -126,8 +133,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				anim_up.SetBool(move_hash, false);
 				anim_down.SetBool(move_hash, false);
 			}
+			
+			//Time freeze
+			if(desiredMove.magnitude != 0 && Time.timeScale != 1)
+				TimeFreeze.move();
+			else if(desiredMove.magnitude == 0 && Time.timeScale != 0)
+				TimeFreeze.stop();
+				
+			
 			//////////////////////////////////////
-			/// ///////////////////////////////////
+			//////////////////////////////////////
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;

@@ -11,6 +11,6 @@ public class Rotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(Vector3.up*22.5f * Time.deltaTime, Space.World);
+		transform.Rotate(Vector3.up*45 * Time.deltaTime, Space.World);
 	}
 }
